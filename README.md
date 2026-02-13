@@ -30,17 +30,23 @@ En esta sección se presentan las métricas de desempeño del modelo XGBoost.
 ### Curva KS (Kolmogorov-Smirnov)
 El modelo alcanzó un estadístico KS de **0.3466**, lo que indica una sólida capacidad de separación entre clientes sanos y morosos.
 
-![Curva KS](./KS.png)
+<img src="./KS.png" width="500">
 
 ### Explicabilidad con SHAP
 Para garantizar la transparencia del modelo (Explainable AI), se utilizaron valores SHAP para identificar los factores que más influyen en el riesgo. Se observa que los scores externos y el historial de rechazos internos son los predictores más potentes.
 
-![Análisis SHAP](./SHAP.png)
+<img src="./SHAP.png" width="500">
+
+### 🔝 Importancia de Variables (Gain)
+Esta gráfica identifica los predictores con mayor impacto en la reducción de la entropía del modelo. Se observa una dominancia de los scores externos y los ratios de apalancamiento financiero generados mediante ingeniería de variables.
+
+<img src="./Importancia_variables.png" width="500">
 
 ### 📉 Matriz de Confusión y Punto de Corte Óptimo
 Para determinar el umbral de decisión, se utilizó el **Estadístico KS**, estableciendo un punto de corte de **0.488**. Este umbral permite maximizar la rentabilidad del portafolio al equilibrar la aprobación de clientes sanos y la detección de posibles impagos.
 
-![Matriz de Confusión](./MatrizConfusión.png)
+<img src="./MatrizConfusión.png" width="500">
+
 
 #### 💡 Análisis de Impacto de Negocio:
 * **🛡️ Defaults Prevenidos (Verdaderos Positivos):** Se identificaron y bloquearon con éxito **3,502** intentos de crédito de alto riesgo, evitando pérdidas directas de capital.
