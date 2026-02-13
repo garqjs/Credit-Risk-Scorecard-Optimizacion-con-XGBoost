@@ -1,4 +1,4 @@
-# Credit-Risk-Scorecard-Optimizacion-con-XGBoost
+# Score Riesgo Crediticio: Optimización con XGBoost
 Pipeline profesional de riesgo crediticio que integra 4 fuentes de datos, ingeniería de variables financieras y un modelo de Machine Learning con restricciones monotónicas para una toma de decisiones auditable y transparente.
 
 📂 Descripción del Proyecto
@@ -28,7 +28,7 @@ Annuity Burden: Capacidad de pago mensual real.
 En esta sección se presentan las métricas de desempeño del modelo XGBoost.
 
 ### Curva KS (Kolmogorov-Smirnov)
-El modelo alcanzó un estadístico KS de **0.3416**, lo que indica una sólida capacidad de separación entre clientes sanos y morosos.
+El modelo alcanzó un estadístico KS de **0.3466**, lo que indica una sólida capacidad de separación entre clientes sanos y morosos.
 
 ![Curva KS](./KS.png)
 
@@ -37,12 +37,46 @@ Para garantizar la transparencia del modelo (Explainable AI), se utilizaron valo
 
 ![Análisis SHAP](./SHAP.png)
 
+### 📉 Matriz de Confusión y Punto de Corte Óptimo
+Para determinar el umbral de decisión, se utilizó el **Estadístico KS**, estableciendo un punto de corte de **0.488**. Este umbral permite maximizar la rentabilidad del portafolio al equilibrar la aprobación de clientes sanos y la detección de posibles impagos.
+
+![Matriz de Confusión](./MatrizConfusión.png)
+
+#### 💡 Análisis de Impacto de Negocio:
+* **🛡️ Defaults Prevenidos (Verdaderos Positivos):** Se identificaron y bloquearon con éxito **3,502** intentos de crédito de alto riesgo, evitando pérdidas directas de capital.
+* **✅ Eficiencia de Aprobación (Verdaderos Negativos):** El modelo permitió el flujo operativo de **35,971** clientes con alta probabilidad de pago, asegurando la generación de ingresos por intereses.
+* **⚠️ Control de Falsos Negativos:** Se minimizó la filtración de morosos a solo **1,463** casos, logrando una tasa de captura de morosidad (Recall) del **70.53%**.
+
 ## 💰 Impacto de Negocio
 
-Utilizando el punto de corte (threshold) óptimo de **0.468**, el modelo genera el siguiente valor:
+Utilizando el punto de corte (threshold) óptimo de **0.488**, el modelo genera el siguiente valor:
 
 | Concepto | Resultado | Impacto |
 | :--- | :---: | :--- |
 | **Clientes Sanos Aprobados** | 35,971 | Flujo de interés activo |
 | **Defaults Evitados** | 3,502 | Ahorro de capital |
 | **Detección de Morosidad** | 70.5% | Reducción de cartera vencida |
+
+## ⚙️ Ficha Técnica del Modelo (Model Specifications)
+
+Para garantizar la replicabilidad y transparencia del sistema, se detallan las especificaciones técnicas del modelo campeón:
+
+### 🤖 Configuración del Algoritmo (XGBoost)
+* **Objetivo:** Clasificación binaria (`binary:logistic`).
+* **Métrica de Evaluación:** AUC (Área bajo la curva ROC).
+* **Restricciones Monotónicas (`monotone_constraints`):** Implementadas para asegurar que variables como ingresos y ratios de deuda tengan un impacto lógico y auditable en la predicción del riesgo.
+* **Manejo de Desbalanceo:** Se utilizó el parámetro `scale_pos_weight` basado en la proporción real de la clase minoritaria (Defaults), mejorando la detección de morosos sin sacrificar precisión.
+* **Regularización:** Se aplicó un `learning_rate` de 0.05 y un `max_depth` de 5 para prevenir el sobreajuste (overfitting).
+
+### 🏛️ Arquitectura de Datos
+* **Motor de Procesamiento:** DuckDB (OLAP in-memory).
+* **Fuentes Integradas:** 4 Datasets (Application, Bureau, Previous Applications e Installments).
+* **Estrategia de Imputación:** Imputación por mediana para variables lineales y manejo nativo de nulos para el modelo de gradiente.
+
+### 📉 KPIs de Desempeño Final
+| Métrica | Valor |
+| :--- | :--- |
+| **AUC Score** | 0.7313 |
+| **Gini Coefficient** | 0.4626 |
+| **Estadístico KS** | 0.3416 |
+| **Recall (Tasa de Captura de Morosos)** | 70.53% |
