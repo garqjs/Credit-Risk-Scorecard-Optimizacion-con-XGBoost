@@ -22,3 +22,27 @@ Ratio Global Leverage: Exposición total de deuda vs. ingresos.
 Payment Friction: Score de morosidad acumulada y retrasos en pagos.
 
 Annuity Burden: Capacidad de pago mensual real.
+
+## 📊 Resultados y Validación
+
+En esta sección se presentan las métricas de desempeño del modelo XGBoost.
+
+### Curva KS (Kolmogorov-Smirnov)
+El modelo alcanzó un estadístico KS de **0.3416**, lo que indica una sólida capacidad de separación entre clientes sanos y morosos.
+
+![Curva KS](./images/ks_curve.png)
+
+### Explicabilidad con SHAP
+Para garantizar la transparencia del modelo (Explainable AI), se utilizaron valores SHAP para identificar los factores que más influyen en el riesgo. Se observa que los scores externos y el historial de rechazos internos son los predictores más potentes.
+
+![Análisis SHAP](./images/shap_analysis.png)
+
+## 💰 Impacto de Negocio
+
+Utilizando el punto de corte (threshold) óptimo de **0.468**, el modelo genera el siguiente valor:
+
+| Concepto | Resultado | Impacto |
+| :--- | :---: | :--- |
+| **Clientes Sanos Aprobados** | 35,971 | Flujo de interés activo |
+| **Defaults Evitados** | 3,502 | Ahorro de capital |
+| **Detección de Morosidad** | 70.5% | Reducción de cartera vencida |
