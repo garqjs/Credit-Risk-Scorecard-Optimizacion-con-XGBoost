@@ -1,5 +1,4 @@
 # Score Riesgo Crediticio: Optimización con XGBoost
-Pipeline profesional de riesgo crediticio que integra 4 fuentes de datos, ingeniería de variables financieras y un modelo de Machine Learning con restricciones monotónicas para una toma de decisiones auditable y transparente.
 
 📂 Descripción del Proyecto
 Este proyecto simula un entorno de producción bancaria para predecir el default de clientes. Se utilizaron datos de aplicaciones, historial en Buró de Crédito, pagos previos y rechazos internos para construir un modelo de scoring robusto.
@@ -13,6 +12,17 @@ Explicabilidad: SHAP (Valores de Shapley para transparencia).
 
 Validación: Scikit-learn (Métricas KS, Gini y AUC).
 
+## 🏗️ Arquitectura del Sistema y Flujo de Datos
+
+Para este proyecto se implementó una arquitectura basada en el **Medallion Pattern**, asegurando que el procesamiento de datos sea eficiente, escalable y auditable.
+
+### 🔄 Etapas del Pipeline:
+
+1.  **Capa de Ingesta (Bronze):** Extracción de datos crudos desde 4 fuentes principales (Application, Bureau, Previous Apps e Installments) utilizando **DuckDB** para un manejo eficiente de memoria.
+2.  **Capa de Transformación (Silver):** Creación de **Vistas SQL** donde se ejecutan agregaciones complejas, limpieza de nulos y normalización de registros.
+3.  **Capa de Negocio (Gold):** Materialización de la tabla maestra enriquecida con **Ingeniería de Variables** (Ratios de Apalancamiento y Fricción de Pago).
+4.  **Capa de Inteligencia:** Entrenamiento e inferencia mediante **XGBoost** con restricciones monotónicas, garantizando que el modelo respete las reglas de negocio bancarias.
+5.  **Capa de Explicabilidad:** Auditoría de decisiones mediante valores **SHAP**, permitiendo una interpretación clara de los factores de riesgo para cada cliente.
 
 📈 Ingeniería de Variables (Features de Negocio)
 Se crearon indicadores clave para la evaluación de riesgo:
