@@ -75,7 +75,7 @@ Utilizando el punto de corte (threshold) óptimo de **0.488**, el modelo genera 
 
 ## ⚙️ Ficha Técnica del Modelo (Model Specifications)
 
-Para garantizar la replicabilidad y transparencia del sistema, se detallan las especificaciones técnicas del modelo campeón:
+Para garantizar la replicabilidad y transparencia del sistema, se detallan las especificaciones técnicas del modelo ganador:
 
 ### 🤖 Configuración del Algoritmo (XGBoost)
 * **Objetivo:** Clasificación binaria (`binary:logistic`).
@@ -84,10 +84,6 @@ Para garantizar la replicabilidad y transparencia del sistema, se detallan las e
 * **Manejo de Desbalanceo:** Se utilizó el parámetro `scale_pos_weight` basado en la proporción real de la clase minoritaria (Defaults), mejorando la detección de morosos sin sacrificar precisión.
 * **Regularización:** Se aplicó un `learning_rate` de 0.05 y un `max_depth` de 5 para prevenir el sobreajuste (overfitting).
 
-### 🏛️ Arquitectura de Datos
-* **Motor de Procesamiento:** DuckDB (OLAP in-memory).
-* **Fuentes Integradas:** 4 Datasets (Application, Bureau, Previous Applications e Installments).
-* **Estrategia de Imputación:** Imputación por mediana para variables lineales y manejo nativo de nulos para el modelo de gradiente.
 
 ### 📉 KPIs de Desempeño Final
 | Métrica | Valor |
