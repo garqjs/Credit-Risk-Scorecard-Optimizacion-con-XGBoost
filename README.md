@@ -30,12 +30,12 @@ En esta sección se presentan las métricas de desempeño del modelo XGBoost.
 ### Curva KS (Kolmogorov-Smirnov)
 El modelo alcanzó un estadístico KS de **0.3416**, lo que indica una sólida capacidad de separación entre clientes sanos y morosos.
 
-![Curva KS](./images/ks_curve.png)
+![Curva KS](./CurvaKS.png)
 
 ### Explicabilidad con SHAP
 Para garantizar la transparencia del modelo (Explainable AI), se utilizaron valores SHAP para identificar los factores que más influyen en el riesgo. Se observa que los scores externos y el historial de rechazos internos son los predictores más potentes.
 
-![Análisis SHAP](./images/shap_analysis.png)
+![Análisis SHAP](./SHAP.png)
 
 ## 💰 Impacto de Negocio
 
